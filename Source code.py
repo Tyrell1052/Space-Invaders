@@ -108,10 +108,15 @@ while running:
             if event.key == pygame.K_SPACE:
                 player.shoot()
 
-
     # Update
     all_sprites.update()
 
+    # check to see if a bullet hit a mob
+    hits = pygame.sprite.groupcollide(mobs, bullets, True, True)
+    for hit in hits:
+        m = Mob()
+        all_sprites.add(m)
+        mobs.add(m)
     # check to see if mod hit the player
     hits = pygame.sprite.spritecollide(player, mobs, False)
     if hits:
